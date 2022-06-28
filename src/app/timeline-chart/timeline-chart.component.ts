@@ -70,7 +70,7 @@ export class TimelineChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.count().subscribe(
+    this.dataService.getTimelineData().subscribe(
       res => {
         this.data = res;
 

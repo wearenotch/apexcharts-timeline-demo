@@ -12,7 +12,7 @@ export class DataService {
     private httpClient: HttpClient
   ) { }
 
-  count(): Observable<StackedTimelineChartData[]> {
+  getTimelineData(): Observable<StackedTimelineChartData[]> {
     return this.httpClient.get<StackedTimelineChartData[]>(this.resourceUrl);
   }
 }
