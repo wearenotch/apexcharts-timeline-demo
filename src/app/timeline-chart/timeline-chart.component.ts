@@ -12,7 +12,6 @@ import {
   ApexLegend,
   ApexTitleSubtitle
 } from "ng-apexcharts";
-import { TimelineChartData } from '../models/timeline-chart-data.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -73,31 +72,8 @@ export class TimelineChartComponent implements OnInit {
     this.dataService.getTimelineData().subscribe(
       res => {
         this.data = res;
-
-        const map: Map<string, TimelineChartData[]> = new Map();
-
-        this.data.map(d => {
-          if (!map.has(d.name)) {
-            map.set(d.name, d.data);
-          } else if (map.has(d.name)) {
-            map.set(d.name, map.get(d.name)!.concat(d.data));
-          }
-        });
-
-        this.updateChart(map);
+        this.chartOptions.series = this.data;
       }
     );
   }
-
-  updateChart(map: Map<string, TimelineChartData[]>): void {
-    this.chartOptions.series = [];
-
-    map.forEach((value, key) => {
-      this.chartOptions.series!.push({
-        name: key,
-        data: value
-      });
-    });
-  }
-
 }
