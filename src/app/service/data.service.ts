@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { StackedTimelineChartData } from "../models/stacked-timeline-chart-data.model";
+import { StackedTimelineChartData } from "../model/stacked-timeline-chart-data.model";
 
 @Injectable({ providedIn: 'root' })
 export class DataService {

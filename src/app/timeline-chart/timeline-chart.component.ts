@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { StackedTimelineChartData } from '../models/stacked-timeline-chart-data.model';
+import { StackedTimelineChartData } from '../model/stacked-timeline-chart-data.model';
 import { DataService } from '../service/data.service';
 
 import {
