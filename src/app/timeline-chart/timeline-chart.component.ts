@@ -10,6 +10,7 @@ import {
   ApexFill,
   ApexXAxis,
   ApexLegend,
+  ApexTooltip,
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -19,6 +20,7 @@ export type ChartOptions = {
   fill: ApexFill;
   xaxis: ApexXAxis;
   legend: ApexLegend;
+  tooltip: ApexTooltip;
 };
 
 @Component({
@@ -59,6 +61,23 @@ export class TimelineChartComponent implements OnInit {
       },
       legend: {
         position: "right"
+      },
+      tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+          var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+
+          const seriesName = w.globals.initialSeries[seriesIndex].name;
+          const enterDate = new Date(data.y[0]).toLocaleString('en-GB', { timeZone: 'UTC' });
+          const exitDate = new Date(data.y[1]).toLocaleString('en-GB', { timeZone: 'UTC' });
+
+          return '<div class="apexcharts-tooltip-rangebar"> <div> <span class="series-name" style="color: #FF4560">' +
+            seriesName +
+            '</span></div><div> <span class="category">Inky: </span> <span class="value start-value">' +
+            enterDate +
+            '</span> <span class="separator">-</span> <span class="value end-value">' +
+            exitDate +
+            '</span></div></div>';
+        }
       }
     };
   }
