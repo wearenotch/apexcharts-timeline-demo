@@ -6,21 +6,21 @@ import {
   ChartComponent,
   ApexAxisChartSeries,
   ApexChart,
+  ApexTitleSubtitle,
   ApexPlotOptions,
-  ApexXAxis,
   ApexFill,
+  ApexXAxis,
   ApexLegend,
-  ApexTitleSubtitle
 } from "ng-apexcharts";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
-  fill: ApexFill;
-  legend: ApexLegend;
-  xaxis: ApexXAxis;
-  plotOptions: ApexPlotOptions;
   title: ApexTitleSubtitle;
+  plotOptions: ApexPlotOptions;
+  fill: ApexFill;
+  xaxis: ApexXAxis;
+  legend: ApexLegend;
 };
 
 @Component({
