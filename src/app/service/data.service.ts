@@ -6,13 +6,11 @@ import { StackedTimelineChartData } from "../model/stacked-timeline-chart-data.m
 @Injectable({ providedIn: 'root' })
 export class DataService {
 
-  resourceUrl = "/assets/data.json";
-
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  getTimelineData(): Observable<StackedTimelineChartData[]> {
-    return this.httpClient.get<StackedTimelineChartData[]>(this.resourceUrl);
+  getTimelineData(id: number): Observable<StackedTimelineChartData[]> {
+    return this.httpClient.get<StackedTimelineChartData[]>(`/assets/data_${id}.json`);
   }
 }

@@ -12,6 +12,7 @@ import {
   ApexLegend,
   ApexTooltip,
 } from "ng-apexcharts";
+import { TimelineChartData } from '../model/timeline-chart-data.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -30,7 +31,8 @@ export type ChartOptions = {
 })
 export class TimelineChartComponent implements OnInit {
 
-  data: StackedTimelineChartData[] = [];
+  entities: number[] = [1, 2, 3];
+  data: Map<string, TimelineChartData[]> = new Map();
 
   @ViewChild("chart", { static: false })
   chart!: ChartComponent;
@@ -83,11 +85,34 @@ export class TimelineChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getTimelineData().subscribe(
-      res => {
-        this.data = res;
-        this.chartOptions.series = this.data;
-      }
-    );
+    this.entities.forEach(id => {
+      this.dataService.getTimelineData(id).subscribe(
+        res => {
+
+          res.map(r => {
+
+            if (!this.data.has(r.name)) {
+              this.data.set(r.name, r.data);
+
+            } else if (this.data.has(r.name)) {
+              this.data.set(r.name, this.data.get(r.name)!.concat(r.data));
+            }
+          });
+
+          this.updateChart();
+        });
+    });
+  }
+
+
+  updateChart(): void {
+    this.chartOptions.series = [];
+
+    this.data.forEach((value, key) => {
+      this.chartOptions.series!.push({
+        name: key,
+        data: value
+      });
+    });
   }
 }
