@@ -6,7 +6,6 @@ import {
   ChartComponent,
   ApexAxisChartSeries,
   ApexChart,
-  ApexTitleSubtitle,
   ApexPlotOptions,
   ApexFill,
   ApexXAxis,
@@ -16,7 +15,6 @@ import {
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
-  title: ApexTitleSubtitle;
   plotOptions: ApexPlotOptions;
   fill: ApexFill;
   xaxis: ApexXAxis;
@@ -45,9 +43,6 @@ export class TimelineChartComponent implements OnInit {
       chart: {
         height: 350,
         type: "rangeBar"
-      },
-      title: {
-        text: "Timeline chart"
       },
       plotOptions: {
         bar: {
